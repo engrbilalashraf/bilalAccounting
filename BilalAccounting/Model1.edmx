@@ -1,0 +1,568 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DbBilalAccountingsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="Accounts_ID" />
+          </Key>
+          <Property Name="Accounts_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Accounts_Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Auto_Number">
+          <Key>
+            <PropertyRef Name="Auto_Number_id" />
+          </Key>
+          <Property Name="Auto_Number_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sch_Shop_Invoice_Number" Type="int" />
+          <Property Name="Auto_Acc_No" Type="int" />
+        </EntityType>
+        <EntityType Name="Chart_Of_Accounts">
+          <Key>
+            <PropertyRef Name="Chart_Of_Accounts_ID" />
+          </Key>
+          <Property Name="Chart_Of_Accounts_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Chart_Of_Accounts_Type_ID" Type="int" />
+          <Property Name="Chart_Of_Accounts_Code" Type="varchar" MaxLength="50" />
+          <Property Name="Chart_Of_Accounts_Description" Type="varchar" MaxLength="50" />
+          <Property Name="Chart_Of_Accounts_Beginning_Balances" Type="float" />
+          <Property Name="Chart_Of_Accounts_Status" Type="bit" />
+          <Property Name="Chart_Of_Accounts_oName" Type="varchar" MaxLength="50" />
+          <Property Name="Chart_Of_Accounts_oFather" Type="varchar" MaxLength="50" />
+          <Property Name="Chart_Of_Accounts_oMobile" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Chart_Of_Accounts_Detail">
+          <Key>
+            <PropertyRef Name="Chart_Of_Accounts_Detail_ID" />
+          </Key>
+          <Property Name="Chart_Of_Accounts_Detail_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Chart_Of_Accounts_ID" Type="int" />
+          <Property Name="Sch_Accounts_ID" Type="int" />
+          <Property Name="Chart_Of_Accounts_Detail_Account_Trans_No" Type="varchar(max)" />
+          <Property Name="Chart_Of_Accounts_Detail_Account_Type" Type="varchar(max)" />
+          <Property Name="Chart_Of_Accounts_Detail_Account_Ledger" Type="varchar(max)" />
+          <Property Name="Chart_Of_Accounts_Detail_Account_Date" Type="date" />
+          <Property Name="Chart_Of_Accounts_Detail_Account_Debit" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Chart_Of_Accounts_Detail_Account_Credit" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Chart_Of_Accounts_Type">
+          <Key>
+            <PropertyRef Name="Chart_Of_Accounts_Type_ID" />
+          </Key>
+          <Property Name="Chart_Of_Accounts_Type_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Accounts_ID" Type="int" />
+          <Property Name="Chart_Of_Accounts_Type_Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Sch_Accounts">
+          <Key>
+            <PropertyRef Name="Sch_Accounts_ID" />
+          </Key>
+          <Property Name="Sch_Accounts_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sch_Accounts_Invoice_Number" Type="varchar" MaxLength="50" />
+          <Property Name="Sch_Accounts_Description" Type="varchar(max)" />
+          <Property Name="Sch_Accounts_Default_ID" Type="int" Nullable="false" />
+          <Property Name="Sch_Debit_Accounts_ID" Type="int" />
+          <Property Name="Sch_Credit_Accounts_ID" Type="int" />
+          <Property Name="Sch_Accounts_Amount_Debit" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Sch_Accounts_Amount_Credits" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Sch_Accounts_Added_Date" Type="date" />
+          <Property Name="Sch_Accounts_Added_User_ID" Type="int" />
+          <Property Name="Sch_Accounts_Update_Date" Type="date" />
+          <Property Name="Sch_Accounts_Update_User_ID" Type="int" />
+          <Property Name="Sch_Accounts_Image" Type="image" />
+        </EntityType>
+        <EntityType Name="Sch_Accounts_Default">
+          <Key>
+            <PropertyRef Name="Sch_Accounts_Default_ID" />
+          </Key>
+          <Property Name="Sch_Accounts_Default_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sch_Debit_Accounts_ID" Type="int" Nullable="false" />
+          <Property Name="Sch_Credit_Accounts_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Chart_Of_Accounts_Chart_Of_Accounts_Type">
+          <End Role="Chart_Of_Accounts_Type" Type="Self.Chart_Of_Accounts_Type" Multiplicity="0..1" />
+          <End Role="Chart_Of_Accounts" Type="Self.Chart_Of_Accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chart_Of_Accounts_Type">
+              <PropertyRef Name="Chart_Of_Accounts_Type_ID" />
+            </Principal>
+            <Dependent Role="Chart_Of_Accounts">
+              <PropertyRef Name="Chart_Of_Accounts_Type_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chart_Of_Accounts_Detail_Chart_Of_Accounts">
+          <End Role="Chart_Of_Accounts" Type="Self.Chart_Of_Accounts" Multiplicity="0..1" />
+          <End Role="Chart_Of_Accounts_Detail" Type="Self.Chart_Of_Accounts_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chart_Of_Accounts">
+              <PropertyRef Name="Chart_Of_Accounts_ID" />
+            </Principal>
+            <Dependent Role="Chart_Of_Accounts_Detail">
+              <PropertyRef Name="Chart_Of_Accounts_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chart_Of_Accounts_Detail_Sch_Accounts">
+          <End Role="Sch_Accounts" Type="Self.Sch_Accounts" Multiplicity="0..1" />
+          <End Role="Chart_Of_Accounts_Detail" Type="Self.Chart_Of_Accounts_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sch_Accounts">
+              <PropertyRef Name="Sch_Accounts_ID" />
+            </Principal>
+            <Dependent Role="Chart_Of_Accounts_Detail">
+              <PropertyRef Name="Sch_Accounts_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chart_Of_Accounts_Type_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
+          <End Role="Chart_Of_Accounts_Type" Type="Self.Chart_Of_Accounts_Type" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Accounts_ID" />
+            </Principal>
+            <Dependent Role="Chart_Of_Accounts_Type">
+              <PropertyRef Name="Accounts_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sch_Accounts_Default_Chart_Of_Accounts">
+          <End Role="Chart_Of_Accounts" Type="Self.Chart_Of_Accounts" Multiplicity="1" />
+          <End Role="Sch_Accounts_Default" Type="Self.Sch_Accounts_Default" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chart_Of_Accounts">
+              <PropertyRef Name="Chart_Of_Accounts_ID" />
+            </Principal>
+            <Dependent Role="Sch_Accounts_Default">
+              <PropertyRef Name="Sch_Debit_Accounts_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sch_Accounts_Default_Chart_Of_Accounts1">
+          <End Role="Chart_Of_Accounts" Type="Self.Chart_Of_Accounts" Multiplicity="0..1" />
+          <End Role="Sch_Accounts_Default" Type="Self.Sch_Accounts_Default" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chart_Of_Accounts">
+              <PropertyRef Name="Chart_Of_Accounts_ID" />
+            </Principal>
+            <Dependent Role="Sch_Accounts_Default">
+              <PropertyRef Name="Sch_Credit_Accounts_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sch_Accounts_Sch_Accounts_Default">
+          <End Role="Sch_Accounts_Default" Type="Self.Sch_Accounts_Default" Multiplicity="1" />
+          <End Role="Sch_Accounts" Type="Self.Sch_Accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sch_Accounts_Default">
+              <PropertyRef Name="Sch_Accounts_Default_ID" />
+            </Principal>
+            <Dependent Role="Sch_Accounts">
+              <PropertyRef Name="Sch_Accounts_Default_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DbBilalAccountingsModelStoreContainer">
+          <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Auto_Number" EntityType="Self.Auto_Number" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Chart_Of_Accounts" EntityType="Self.Chart_Of_Accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Chart_Of_Accounts_Detail" EntityType="Self.Chart_Of_Accounts_Detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Chart_Of_Accounts_Type" EntityType="Self.Chart_Of_Accounts_Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sch_Accounts" EntityType="Self.Sch_Accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sch_Accounts_Default" EntityType="Self.Sch_Accounts_Default" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Chart_Of_Accounts_Chart_Of_Accounts_Type" Association="Self.FK_Chart_Of_Accounts_Chart_Of_Accounts_Type">
+            <End Role="Chart_Of_Accounts_Type" EntitySet="Chart_Of_Accounts_Type" />
+            <End Role="Chart_Of_Accounts" EntitySet="Chart_Of_Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chart_Of_Accounts_Detail_Chart_Of_Accounts" Association="Self.FK_Chart_Of_Accounts_Detail_Chart_Of_Accounts">
+            <End Role="Chart_Of_Accounts" EntitySet="Chart_Of_Accounts" />
+            <End Role="Chart_Of_Accounts_Detail" EntitySet="Chart_Of_Accounts_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chart_Of_Accounts_Detail_Sch_Accounts" Association="Self.FK_Chart_Of_Accounts_Detail_Sch_Accounts">
+            <End Role="Sch_Accounts" EntitySet="Sch_Accounts" />
+            <End Role="Chart_Of_Accounts_Detail" EntitySet="Chart_Of_Accounts_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chart_Of_Accounts_Type_Accounts" Association="Self.FK_Chart_Of_Accounts_Type_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Chart_Of_Accounts_Type" EntitySet="Chart_Of_Accounts_Type" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sch_Accounts_Default_Chart_Of_Accounts" Association="Self.FK_Sch_Accounts_Default_Chart_Of_Accounts">
+            <End Role="Chart_Of_Accounts" EntitySet="Chart_Of_Accounts" />
+            <End Role="Sch_Accounts_Default" EntitySet="Sch_Accounts_Default" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sch_Accounts_Default_Chart_Of_Accounts1" Association="Self.FK_Sch_Accounts_Default_Chart_Of_Accounts1">
+            <End Role="Chart_Of_Accounts" EntitySet="Chart_Of_Accounts" />
+            <End Role="Sch_Accounts_Default" EntitySet="Sch_Accounts_Default" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sch_Accounts_Sch_Accounts_Default" Association="Self.FK_Sch_Accounts_Sch_Accounts_Default">
+            <End Role="Sch_Accounts_Default" EntitySet="Sch_Accounts_Default" />
+            <End Role="Sch_Accounts" EntitySet="Sch_Accounts" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DbBilalAccountingsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Chart_Of_Accounts">
+          <Key>
+            <PropertyRef Name="Chart_Of_Accounts_ID" />
+          </Key>
+          <Property Name="Chart_Of_Accounts_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Chart_Of_Accounts_Type_ID" Type="Int32" />
+          <Property Name="Chart_Of_Accounts_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Chart_Of_Accounts_Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Chart_Of_Accounts_Beginning_Balances" Type="Double" />
+          <Property Name="Chart_Of_Accounts_Status" Type="Boolean" />
+          <Property Name="Chart_Of_Accounts_oName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Chart_Of_Accounts_oFather" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Chart_Of_Accounts_oMobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Chart_Of_Accounts_Type" Relationship="Self.FK_Chart_Of_Accounts_Chart_Of_Accounts_Type" FromRole="Chart_Of_Accounts" ToRole="Chart_Of_Accounts_Type" />
+          <NavigationProperty Name="Chart_Of_Accounts_Detail" Relationship="Self.FK_Chart_Of_Accounts_Detail_Chart_Of_Accounts" FromRole="Chart_Of_Accounts" ToRole="Chart_Of_Accounts_Detail" />
+          <NavigationProperty Name="Sch_Accounts_Default" Relationship="Self.FK_Sch_Accounts_Default_Chart_Of_Accounts" FromRole="Chart_Of_Accounts" ToRole="Sch_Accounts_Default" />
+          <NavigationProperty Name="Sch_Accounts_Default1" Relationship="Self.FK_Sch_Accounts_Default_Chart_Of_Accounts1" FromRole="Chart_Of_Accounts" ToRole="Sch_Accounts_Default" />
+        </EntityType>
+        <EntityType Name="Chart_Of_Accounts_Detail">
+          <Key>
+            <PropertyRef Name="Chart_Of_Accounts_Detail_ID" />
+          </Key>
+          <Property Name="Chart_Of_Accounts_Detail_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Chart_Of_Accounts_ID" Type="Int32" />
+          <Property Name="Sch_Accounts_ID" Type="Int32" />
+          <Property Name="Chart_Of_Accounts_Detail_Account_Trans_No" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Chart_Of_Accounts_Detail_Account_Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Chart_Of_Accounts_Detail_Account_Ledger" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Chart_Of_Accounts_Detail_Account_Date" Type="DateTime" Precision="0" />
+          <Property Name="Chart_Of_Accounts_Detail_Account_Debit" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Chart_Of_Accounts_Detail_Account_Credit" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Chart_Of_Accounts" Relationship="Self.FK_Chart_Of_Accounts_Detail_Chart_Of_Accounts" FromRole="Chart_Of_Accounts_Detail" ToRole="Chart_Of_Accounts" />
+          <NavigationProperty Name="Sch_Accounts" Relationship="Self.FK_Chart_Of_Accounts_Detail_Sch_Accounts" FromRole="Chart_Of_Accounts_Detail" ToRole="Sch_Accounts" />
+        </EntityType>
+        <EntityType Name="Chart_Of_Accounts_Type">
+          <Key>
+            <PropertyRef Name="Chart_Of_Accounts_Type_ID" />
+          </Key>
+          <Property Name="Chart_Of_Accounts_Type_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Accounts_ID" Type="Int32" />
+          <Property Name="Chart_Of_Accounts_Type_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Chart_Of_Accounts" Relationship="Self.FK_Chart_Of_Accounts_Chart_Of_Accounts_Type" FromRole="Chart_Of_Accounts_Type" ToRole="Chart_Of_Accounts" />
+          <NavigationProperty Name="Account" Relationship="DbBilalAccountingsModel.FK_Chart_Of_Accounts_Type_Accounts" FromRole="Chart_Of_Accounts_Type" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="Sch_Accounts">
+          <Key>
+            <PropertyRef Name="Sch_Accounts_ID" />
+          </Key>
+          <Property Name="Sch_Accounts_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sch_Accounts_Invoice_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Sch_Accounts_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Sch_Accounts_Default_ID" Type="Int32" Nullable="false" />
+          <Property Name="Sch_Debit_Accounts_ID" Type="Int32" />
+          <Property Name="Sch_Credit_Accounts_ID" Type="Int32" />
+          <Property Name="Sch_Accounts_Amount_Debit" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Sch_Accounts_Amount_Credits" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Sch_Accounts_Added_Date" Type="DateTime" Precision="0" />
+          <Property Name="Sch_Accounts_Added_User_ID" Type="Int32" />
+          <Property Name="Sch_Accounts_Update_Date" Type="DateTime" Precision="0" />
+          <Property Name="Sch_Accounts_Update_User_ID" Type="Int32" />
+          <Property Name="Sch_Accounts_Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Chart_Of_Accounts_Detail" Relationship="Self.FK_Chart_Of_Accounts_Detail_Sch_Accounts" FromRole="Sch_Accounts" ToRole="Chart_Of_Accounts_Detail" />
+          <NavigationProperty Name="Sch_Accounts_Default" Relationship="Self.FK_Sch_Accounts_Sch_Accounts_Default" FromRole="Sch_Accounts" ToRole="Sch_Accounts_Default" />
+        </EntityType>
+        <EntityType Name="Sch_Accounts_Default">
+          <Key>
+            <PropertyRef Name="Sch_Accounts_Default_ID" />
+          </Key>
+          <Property Name="Sch_Accounts_Default_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sch_Debit_Accounts_ID" Type="Int32" Nullable="false" />
+          <Property Name="Sch_Credit_Accounts_ID" Type="Int32" />
+          <NavigationProperty Name="Chart_Of_Accounts" Relationship="Self.FK_Sch_Accounts_Default_Chart_Of_Accounts" FromRole="Sch_Accounts_Default" ToRole="Chart_Of_Accounts" />
+          <NavigationProperty Name="Chart_Of_Accounts1" Relationship="Self.FK_Sch_Accounts_Default_Chart_Of_Accounts1" FromRole="Sch_Accounts_Default" ToRole="Chart_Of_Accounts" />
+          <NavigationProperty Name="Sch_Accounts" Relationship="Self.FK_Sch_Accounts_Sch_Accounts_Default" FromRole="Sch_Accounts_Default" ToRole="Sch_Accounts" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Chart_Of_Accounts_Chart_Of_Accounts_Type">
+          <End Role="Chart_Of_Accounts_Type" Type="Self.Chart_Of_Accounts_Type" Multiplicity="0..1" />
+          <End Role="Chart_Of_Accounts" Type="Self.Chart_Of_Accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chart_Of_Accounts_Type">
+              <PropertyRef Name="Chart_Of_Accounts_Type_ID" />
+            </Principal>
+            <Dependent Role="Chart_Of_Accounts">
+              <PropertyRef Name="Chart_Of_Accounts_Type_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chart_Of_Accounts_Detail_Chart_Of_Accounts">
+          <End Role="Chart_Of_Accounts" Type="Self.Chart_Of_Accounts" Multiplicity="0..1" />
+          <End Role="Chart_Of_Accounts_Detail" Type="Self.Chart_Of_Accounts_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chart_Of_Accounts">
+              <PropertyRef Name="Chart_Of_Accounts_ID" />
+            </Principal>
+            <Dependent Role="Chart_Of_Accounts_Detail">
+              <PropertyRef Name="Chart_Of_Accounts_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sch_Accounts_Default_Chart_Of_Accounts">
+          <End Role="Chart_Of_Accounts" Type="Self.Chart_Of_Accounts" Multiplicity="1" />
+          <End Role="Sch_Accounts_Default" Type="Self.Sch_Accounts_Default" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chart_Of_Accounts">
+              <PropertyRef Name="Chart_Of_Accounts_ID" />
+            </Principal>
+            <Dependent Role="Sch_Accounts_Default">
+              <PropertyRef Name="Sch_Debit_Accounts_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sch_Accounts_Default_Chart_Of_Accounts1">
+          <End Role="Chart_Of_Accounts" Type="Self.Chart_Of_Accounts" Multiplicity="0..1" />
+          <End Role="Sch_Accounts_Default" Type="Self.Sch_Accounts_Default" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chart_Of_Accounts">
+              <PropertyRef Name="Chart_Of_Accounts_ID" />
+            </Principal>
+            <Dependent Role="Sch_Accounts_Default">
+              <PropertyRef Name="Sch_Credit_Accounts_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chart_Of_Accounts_Detail_Sch_Accounts">
+          <End Role="Sch_Accounts" Type="Self.Sch_Accounts" Multiplicity="0..1" />
+          <End Role="Chart_Of_Accounts_Detail" Type="Self.Chart_Of_Accounts_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sch_Accounts">
+              <PropertyRef Name="Sch_Accounts_ID" />
+            </Principal>
+            <Dependent Role="Chart_Of_Accounts_Detail">
+              <PropertyRef Name="Sch_Accounts_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sch_Accounts_Sch_Accounts_Default">
+          <End Role="Sch_Accounts_Default" Type="Self.Sch_Accounts_Default" Multiplicity="1" />
+          <End Role="Sch_Accounts" Type="Self.Sch_Accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sch_Accounts_Default">
+              <PropertyRef Name="Sch_Accounts_Default_ID" />
+            </Principal>
+            <Dependent Role="Sch_Accounts">
+              <PropertyRef Name="Sch_Accounts_Default_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DbBilalAccountingsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Chart_Of_Accounts" EntityType="Self.Chart_Of_Accounts" />
+          <EntitySet Name="Chart_Of_Accounts_Detail" EntityType="Self.Chart_Of_Accounts_Detail" />
+          <EntitySet Name="Chart_Of_Accounts_Type" EntityType="Self.Chart_Of_Accounts_Type" />
+          <EntitySet Name="Sch_Accounts" EntityType="Self.Sch_Accounts" />
+          <EntitySet Name="Sch_Accounts_Default" EntityType="Self.Sch_Accounts_Default" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <AssociationSet Name="FK_Chart_Of_Accounts_Chart_Of_Accounts_Type" Association="Self.FK_Chart_Of_Accounts_Chart_Of_Accounts_Type">
+            <End Role="Chart_Of_Accounts_Type" EntitySet="Chart_Of_Accounts_Type" />
+            <End Role="Chart_Of_Accounts" EntitySet="Chart_Of_Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chart_Of_Accounts_Detail_Chart_Of_Accounts" Association="Self.FK_Chart_Of_Accounts_Detail_Chart_Of_Accounts">
+            <End Role="Chart_Of_Accounts" EntitySet="Chart_Of_Accounts" />
+            <End Role="Chart_Of_Accounts_Detail" EntitySet="Chart_Of_Accounts_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sch_Accounts_Default_Chart_Of_Accounts" Association="Self.FK_Sch_Accounts_Default_Chart_Of_Accounts">
+            <End Role="Chart_Of_Accounts" EntitySet="Chart_Of_Accounts" />
+            <End Role="Sch_Accounts_Default" EntitySet="Sch_Accounts_Default" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sch_Accounts_Default_Chart_Of_Accounts1" Association="Self.FK_Sch_Accounts_Default_Chart_Of_Accounts1">
+            <End Role="Chart_Of_Accounts" EntitySet="Chart_Of_Accounts" />
+            <End Role="Sch_Accounts_Default" EntitySet="Sch_Accounts_Default" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chart_Of_Accounts_Detail_Sch_Accounts" Association="Self.FK_Chart_Of_Accounts_Detail_Sch_Accounts">
+            <End Role="Sch_Accounts" EntitySet="Sch_Accounts" />
+            <End Role="Chart_Of_Accounts_Detail" EntitySet="Chart_Of_Accounts_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sch_Accounts_Sch_Accounts_Default" Association="Self.FK_Sch_Accounts_Sch_Accounts_Default">
+            <End Role="Sch_Accounts_Default" EntitySet="Sch_Accounts_Default" />
+            <End Role="Sch_Accounts" EntitySet="Sch_Accounts" />
+          </AssociationSet>
+          <EntitySet Name="Accounts" EntityType="DbBilalAccountingsModel.Account" />
+          <AssociationSet Name="FK_Chart_Of_Accounts_Type_Accounts" Association="DbBilalAccountingsModel.FK_Chart_Of_Accounts_Type_Accounts">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Chart_Of_Accounts_Type" EntitySet="Chart_Of_Accounts_Type" />
+          </AssociationSet>
+          <EntitySet Name="Auto_Number" EntityType="DbBilalAccountingsModel.Auto_Number" />
+        </EntityContainer>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="Accounts_ID" />
+          </Key>
+          <Property Name="Accounts_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Accounts_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Chart_Of_Accounts_Type" Relationship="DbBilalAccountingsModel.FK_Chart_Of_Accounts_Type_Accounts" FromRole="Account" ToRole="Chart_Of_Accounts_Type" />
+        </EntityType>
+        <Association Name="FK_Chart_Of_Accounts_Type_Accounts">
+          <End Type="DbBilalAccountingsModel.Account" Role="Account" Multiplicity="0..1" />
+          <End Type="DbBilalAccountingsModel.Chart_Of_Accounts_Type" Role="Chart_Of_Accounts_Type" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Accounts_ID" />
+            </Principal>
+            <Dependent Role="Chart_Of_Accounts_Type">
+              <PropertyRef Name="Accounts_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Auto_Number">
+          <Key>
+            <PropertyRef Name="Auto_Number_id" />
+          </Key>
+          <Property Name="Auto_Number_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sch_Shop_Invoice_Number" Type="Int32" />
+          <Property Name="Auto_Acc_No" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DbBilalAccountingsModelStoreContainer" CdmEntityContainer="DbBilalAccountingsEntities">
+          <EntitySetMapping Name="Chart_Of_Accounts">
+            <EntityTypeMapping TypeName="DbBilalAccountingsModel.Chart_Of_Accounts">
+              <MappingFragment StoreEntitySet="Chart_Of_Accounts">
+                <ScalarProperty Name="Chart_Of_Accounts_ID" ColumnName="Chart_Of_Accounts_ID" />
+                <ScalarProperty Name="Chart_Of_Accounts_Type_ID" ColumnName="Chart_Of_Accounts_Type_ID" />
+                <ScalarProperty Name="Chart_Of_Accounts_Code" ColumnName="Chart_Of_Accounts_Code" />
+                <ScalarProperty Name="Chart_Of_Accounts_Description" ColumnName="Chart_Of_Accounts_Description" />
+                <ScalarProperty Name="Chart_Of_Accounts_Beginning_Balances" ColumnName="Chart_Of_Accounts_Beginning_Balances" />
+                <ScalarProperty Name="Chart_Of_Accounts_Status" ColumnName="Chart_Of_Accounts_Status" />
+                <ScalarProperty Name="Chart_Of_Accounts_oName" ColumnName="Chart_Of_Accounts_oName" />
+                <ScalarProperty Name="Chart_Of_Accounts_oFather" ColumnName="Chart_Of_Accounts_oFather" />
+                <ScalarProperty Name="Chart_Of_Accounts_oMobile" ColumnName="Chart_Of_Accounts_oMobile" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Chart_Of_Accounts_Detail">
+            <EntityTypeMapping TypeName="DbBilalAccountingsModel.Chart_Of_Accounts_Detail">
+              <MappingFragment StoreEntitySet="Chart_Of_Accounts_Detail">
+                <ScalarProperty Name="Chart_Of_Accounts_Detail_ID" ColumnName="Chart_Of_Accounts_Detail_ID" />
+                <ScalarProperty Name="Chart_Of_Accounts_ID" ColumnName="Chart_Of_Accounts_ID" />
+                <ScalarProperty Name="Sch_Accounts_ID" ColumnName="Sch_Accounts_ID" />
+                <ScalarProperty Name="Chart_Of_Accounts_Detail_Account_Trans_No" ColumnName="Chart_Of_Accounts_Detail_Account_Trans_No" />
+                <ScalarProperty Name="Chart_Of_Accounts_Detail_Account_Type" ColumnName="Chart_Of_Accounts_Detail_Account_Type" />
+                <ScalarProperty Name="Chart_Of_Accounts_Detail_Account_Ledger" ColumnName="Chart_Of_Accounts_Detail_Account_Ledger" />
+                <ScalarProperty Name="Chart_Of_Accounts_Detail_Account_Date" ColumnName="Chart_Of_Accounts_Detail_Account_Date" />
+                <ScalarProperty Name="Chart_Of_Accounts_Detail_Account_Debit" ColumnName="Chart_Of_Accounts_Detail_Account_Debit" />
+                <ScalarProperty Name="Chart_Of_Accounts_Detail_Account_Credit" ColumnName="Chart_Of_Accounts_Detail_Account_Credit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Chart_Of_Accounts_Type">
+            <EntityTypeMapping TypeName="DbBilalAccountingsModel.Chart_Of_Accounts_Type">
+              <MappingFragment StoreEntitySet="Chart_Of_Accounts_Type">
+                <ScalarProperty Name="Chart_Of_Accounts_Type_ID" ColumnName="Chart_Of_Accounts_Type_ID" />
+                <ScalarProperty Name="Accounts_ID" ColumnName="Accounts_ID" />
+                <ScalarProperty Name="Chart_Of_Accounts_Type_Name" ColumnName="Chart_Of_Accounts_Type_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sch_Accounts">
+            <EntityTypeMapping TypeName="DbBilalAccountingsModel.Sch_Accounts">
+              <MappingFragment StoreEntitySet="Sch_Accounts">
+                <ScalarProperty Name="Sch_Accounts_ID" ColumnName="Sch_Accounts_ID" />
+                <ScalarProperty Name="Sch_Accounts_Invoice_Number" ColumnName="Sch_Accounts_Invoice_Number" />
+                <ScalarProperty Name="Sch_Accounts_Description" ColumnName="Sch_Accounts_Description" />
+                <ScalarProperty Name="Sch_Accounts_Default_ID" ColumnName="Sch_Accounts_Default_ID" />
+                <ScalarProperty Name="Sch_Debit_Accounts_ID" ColumnName="Sch_Debit_Accounts_ID" />
+                <ScalarProperty Name="Sch_Credit_Accounts_ID" ColumnName="Sch_Credit_Accounts_ID" />
+                <ScalarProperty Name="Sch_Accounts_Amount_Debit" ColumnName="Sch_Accounts_Amount_Debit" />
+                <ScalarProperty Name="Sch_Accounts_Amount_Credits" ColumnName="Sch_Accounts_Amount_Credits" />
+                <ScalarProperty Name="Sch_Accounts_Added_Date" ColumnName="Sch_Accounts_Added_Date" />
+                <ScalarProperty Name="Sch_Accounts_Added_User_ID" ColumnName="Sch_Accounts_Added_User_ID" />
+                <ScalarProperty Name="Sch_Accounts_Update_Date" ColumnName="Sch_Accounts_Update_Date" />
+                <ScalarProperty Name="Sch_Accounts_Update_User_ID" ColumnName="Sch_Accounts_Update_User_ID" />
+                <ScalarProperty Name="Sch_Accounts_Image" ColumnName="Sch_Accounts_Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sch_Accounts_Default">
+            <EntityTypeMapping TypeName="DbBilalAccountingsModel.Sch_Accounts_Default">
+              <MappingFragment StoreEntitySet="Sch_Accounts_Default">
+                <ScalarProperty Name="Sch_Accounts_Default_ID" ColumnName="Sch_Accounts_Default_ID" />
+                <ScalarProperty Name="Sch_Debit_Accounts_ID" ColumnName="Sch_Debit_Accounts_ID" />
+                <ScalarProperty Name="Sch_Credit_Accounts_ID" ColumnName="Sch_Credit_Accounts_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DbBilalAccountingsModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="DbBilalAccountingsModel.Account">
+              <MappingFragment StoreEntitySet="Accounts">
+                <ScalarProperty Name="Accounts_Name" ColumnName="Accounts_Name" />
+                <ScalarProperty Name="Accounts_ID" ColumnName="Accounts_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Auto_Number">
+            <EntityTypeMapping TypeName="DbBilalAccountingsModel.Auto_Number">
+              <MappingFragment StoreEntitySet="Auto_Number">
+                <ScalarProperty Name="Auto_Acc_No" ColumnName="Auto_Acc_No" />
+                <ScalarProperty Name="Sch_Shop_Invoice_Number" ColumnName="Sch_Shop_Invoice_Number" />
+                <ScalarProperty Name="Auto_Number_id" ColumnName="Auto_Number_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -41,6 +41,7 @@ Partial Class Form1
         Me.colChart_Of_Accounts_Type_ID = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemLookUpEdit4 = New DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit()
         Me.colAccounts_ID = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemLookUpEdit5 = New DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit()
         Me.colChart_Of_Accounts_Type_Name = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemLookUpEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit()
         Me.RepositoryItemLookUpEdit3 = New DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit()
@@ -106,7 +107,6 @@ Partial Class Form1
         Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.colAccounts_Type = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.RepositoryItemLookUpEdit5 = New DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit()
         CType(Me.GridView4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -116,6 +116,7 @@ Partial Class Form1
         CType(Me.GridControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemLookUpEdit4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemLookUpEdit5, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemLookUpEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemLookUpEdit3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BandedGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -158,7 +159,6 @@ Partial Class Form1
         CType(Me.GridControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.accountsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RepositoryItemLookUpEdit5, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GridView4
@@ -253,6 +253,12 @@ Partial Class Form1
         Me.colAccounts_ID.Visible = True
         Me.colAccounts_ID.VisibleIndex = 0
         Me.colAccounts_ID.Width = 48
+        '
+        'RepositoryItemLookUpEdit5
+        '
+        Me.RepositoryItemLookUpEdit5.AutoHeight = False
+        Me.RepositoryItemLookUpEdit5.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.RepositoryItemLookUpEdit5.Name = "RepositoryItemLookUpEdit5"
         '
         'colChart_Of_Accounts_Type_Name
         '
@@ -728,7 +734,7 @@ Partial Class Form1
         'FlyoutPanel1
         '
         Me.FlyoutPanel1.Controls.Add(Me.FlyoutPanelControl1)
-        Me.FlyoutPanel1.Location = New System.Drawing.Point(842, 23)
+        Me.FlyoutPanel1.Location = New System.Drawing.Point(286, 12)
         Me.FlyoutPanel1.Name = "FlyoutPanel1"
         Me.FlyoutPanel1.Options.CloseOnOuterClick = True
         ButtonImageOptions2.Image = CType(resources.GetObject("ButtonImageOptions2.Image"), System.Drawing.Image)
@@ -786,12 +792,6 @@ Partial Class Form1
         Me.GridColumn1.FieldName = "Accounts_ID"
         Me.GridColumn1.Name = "GridColumn1"
         '
-        'RepositoryItemLookUpEdit5
-        '
-        Me.RepositoryItemLookUpEdit5.AutoHeight = False
-        Me.RepositoryItemLookUpEdit5.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.RepositoryItemLookUpEdit5.Name = "RepositoryItemLookUpEdit5"
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -814,6 +814,7 @@ Partial Class Form1
         CType(Me.GridControl3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemLookUpEdit4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemLookUpEdit5, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemLookUpEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemLookUpEdit3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BandedGridView1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -856,7 +857,6 @@ Partial Class Form1
         CType(Me.GridControl2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.accountsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RepositoryItemLookUpEdit5, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

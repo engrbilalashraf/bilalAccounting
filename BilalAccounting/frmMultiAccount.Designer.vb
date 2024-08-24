@@ -1890,7 +1890,7 @@ Partial Class frmMultiAccount
         'FlyoutPanel2
         '
         Me.FlyoutPanel2.Controls.Add(Me.FlyoutPanelControl2)
-        Me.FlyoutPanel2.Location = New System.Drawing.Point(617, 107)
+        Me.FlyoutPanel2.Location = New System.Drawing.Point(402, 12)
         Me.FlyoutPanel2.Name = "FlyoutPanel2"
         ButtonImageOptions1.Image = CType(resources.GetObject("ButtonImageOptions1.Image"), System.Drawing.Image)
         Me.FlyoutPanel2.OptionsButtonPanel.Buttons.AddRange(New DevExpress.XtraEditors.ButtonPanel.IBaseButton() {New DevExpress.Utils.PeekFormButton("Close", True, ButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, True, Nothing, True, False, True, Nothing, -1, False)})
